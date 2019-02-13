@@ -1,0 +1,21 @@
+{
+  "name": "monoexample",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
+    ]
+  },
+  "scripts": {
+    "run:web": "yarn workspace web start",
+    "run:native:ios": "yarn workspace native react-native run-ios",
+    "run:native:android": "yarn workspace native react-native run-android"
+  }
+}
