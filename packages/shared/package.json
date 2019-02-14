@@ -1,5 +1,5 @@
 {
   "name": "@monoexample/shared",
-  "main": "index.js",
+  "main": "index.ts",
   "version": "0.0.1"
 }

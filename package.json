@@ -10,12 +10,19 @@
     ],
     "nohoist": [
       "**/react-native",
-      "**/react-native/**"
+      "**/react-native/**",
+      "**/jest"
     ]
   },
   "scripts": {
     "run:web": "yarn workspace web start",
     "run:native:ios": "yarn workspace native react-native run-ios",
-    "run:native:android": "yarn workspace native react-native run-android"
+    "run:native:android": "yarn workspace native react-native run-android",
+
+    "reset:modules": "rm -rf node_modules/ yarn.lock packages/*/node_modules",
+    "reset:yarn": "yarn cache clean",
+    "reset:rn": "watchman watch-del-all; rm -fr $TMPDIR/react-*; rm -rf $TMPDIR/haste-map-react-native-packager-*",
+    "reset:cache": "yarn reset-yarn && yarn reset-rn",
+    "reset": "yarn reset-modules && yarn reset-cache"
   }
 }
