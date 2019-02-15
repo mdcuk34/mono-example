@@ -9,6 +9,8 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "redux": "4.0.1",
+    "react-redux": "6.0.0",
     "@monoexample/shared": "0.0.1"
   },
   "devDependencies": {
