@@ -1,9 +1,12 @@
 import * as types from "./types"
 
-function reducer(state = 0, action = {}) {
+function reducer(state = { count: 0 }, action = {}) {
 	switch (action.type) {
 		case types.INCREMENT:
-			return state + 1;
+			const { count } = state
+			return {
+				count: count + 1
+			}
 		default:
 			return state;
 	}

@@ -30,8 +30,8 @@ const instructions = Platform.select({
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter,
-    previousCounter: counterSelectors.getPreviousCount(state.counter)
+    counter: state.counter.count,
+    previousCounter: counterSelectors.getPreviousCount(state.counter.count)
   }
 }
 
