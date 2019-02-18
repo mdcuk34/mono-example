@@ -12,14 +12,18 @@ const instructions = Platform.select({
 
  class App extends Component {
 
-   onPress = () => this.props.onCounterClick();
+   increaseCounter = () => this.props.onCounterClick();
+   increaseCounterAsync  = () => this.props.increaseAsync();
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.onPress}>
+        <TouchableOpacity onPress={this.increaseCounter}>
           <Text style={styles.welcome}>Previous: {this.props.previousCounter}</Text>
           <Text style={styles.welcome}>Current: {this.props.counter}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.increaseCounterAsync}>
+          <Text style={styles.welcome}>Increase in 5 seconds time</Text>
         </TouchableOpacity>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
@@ -39,6 +43,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onCounterClick: () => {
       dispatch(counterActions.increment())
+    },
+    increaseAsync: () => {
+      dispatch(counterActions.incrementAsync())
     }
   }
 }

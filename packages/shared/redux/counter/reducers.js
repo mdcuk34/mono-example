@@ -7,6 +7,10 @@ function reducer(state = { count: 0 }, action = {}) {
 			return {
 				count: count + 1
 			}
+		case types.SET_CUSTOM_VALUE:
+			return {
+				count: action.payload
+			}
 		default:
 			return state;
 	}
