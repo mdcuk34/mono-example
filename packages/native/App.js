@@ -1,26 +1,38 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { connect } from 'react-redux'
-import { counterActions, counterSelectors } from "@monoexample/shared"
+import React, { Component } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity
+} from "react-native";
+import { connect } from "react-redux";
+import { counterActions, counterSelectors } from "@monoexample/shared";
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    "Double tap R on your keyboard to reload,\n" +
+    "Shake or press menu button for dev menu"
 });
 
- class App extends Component {
+class App extends Component {
+  increaseCounter = () => this.props.onCounterClick();
 
-   increaseCounter = () => this.props.onCounterClick();
-   increaseCounterAsync  = () => this.props.increaseAsync();
+  increaseCounterAsync = () => this.props.increaseAsync();
 
   render() {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.increaseCounter}>
-          <Text style={styles.welcome}>Previous: {this.props.previousCounter}</Text>
-          <Text style={styles.welcome}>Current: {this.props.counter}</Text>
+          <Text style={styles.welcome}>
+            Previous:
+            {this.props.previousCounter}
+          </Text>
+          <Text style={styles.welcome}>
+            Current:
+            {this.props.counter}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.increaseCounterAsync}>
           <Text style={styles.welcome}>Increase in 5 seconds time</Text>
@@ -32,41 +44,40 @@ const instructions = Platform.select({
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    counter: state.counter.count,
-    previousCounter: counterSelectors.getPreviousCount(state.counter.count)
-  }
-}
+const mapStateToProps = state => ({
+  counter: state.counter.count,
+  previousCounter: counterSelectors.getPreviousCount(state.counter.count)
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onCounterClick: () => {
-      dispatch(counterActions.increment())
-    },
-    increaseAsync: () => {
-      dispatch(counterActions.incrementAsync())
-    }
+const mapDispatchToProps = dispatch => ({
+  onCounterClick: () => {
+    dispatch(counterActions.increment());
+  },
+  increaseAsync: () => {
+    dispatch(counterActions.incrementAsync());
   }
-}
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: "center",
+    margin: 10
   },
   instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
+  }
 });
