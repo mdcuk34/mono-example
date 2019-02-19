@@ -1,15 +1,7 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import hello from "@monoexample/shared"
+import {Platform, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import { connect } from 'react-redux'
+import { counterActions, counterSelectors } from "@monoexample/shared"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,18 +10,47 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+ class App extends Component {
+
+   increaseCounter = () => this.props.onCounterClick();
+   increaseCounterAsync  = () => this.props.increaseAsync();
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!{hello}</Text>
+        <TouchableOpacity onPress={this.increaseCounter}>
+          <Text style={styles.welcome}>Previous: {this.props.previousCounter}</Text>
+          <Text style={styles.welcome}>Current: {this.props.counter}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.increaseCounterAsync}>
+          <Text style={styles.welcome}>Increase in 5 seconds time</Text>
+        </TouchableOpacity>
         <Text style={styles.instructions}>To get started, edit App.js</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    counter: state.counter.count,
+    previousCounter: counterSelectors.getPreviousCount(state.counter.count)
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCounterClick: () => {
+      dispatch(counterActions.increment())
+    },
+    increaseAsync: () => {
+      dispatch(counterActions.incrementAsync())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 const styles = StyleSheet.create({
   container: {
