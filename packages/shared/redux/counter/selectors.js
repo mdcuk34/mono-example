@@ -1,7 +1,5 @@
 function getPreviousCount(count) {
-	return count - 1
+  return count - 1;
 }
 
-export {
-	getPreviousCount
-}
+export { getPreviousCount };

@@ -20,11 +20,20 @@
     "run:web": "yarn workspace web start",
     "run:native:ios": "yarn workspace app react-native run-ios",
     "run:native:android": "yarn workspace app react-native run-android",
-
     "reset:modules": "rm -rf node_modules/ yarn.lock packages/*/node_modules",
     "reset:yarn": "yarn cache clean",
     "reset:rn": "watchman watch-del-all; rm -fr $TMPDIR/react-*; rm -rf $TMPDIR/haste-map-react-native-packager-*",
     "reset:cache": "yarn reset:yarn && yarn reset:rn",
     "reset": "yarn reset:modules && yarn reset:cache"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.11.0",
+    "prettier": "^1.16.4"
   }
 }
