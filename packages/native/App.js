@@ -1,83 +1,107 @@
-import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity
-} from "react-native";
-import { connect } from "react-redux";
-import { counterActions, counterSelectors } from "@monoexample/shared";
+import React, { Component } from 'react';
+import { UIManager, LayoutAnimation, View, TouchableOpacity, Text } from 'react-native';
+import { authorize, refresh, revoke } from 'react-native-app-auth';
 
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
-});
+UIManager.setLayoutAnimationEnabledExperimental &&
+UIManager.setLayoutAnimationEnabledExperimental(true);
 
-class App extends Component {
-  increaseCounter = () => this.props.onCounterClick();
+const scopes = ['openid', 'profile', 'email', 'offline_access'];
 
-  increaseCounterAsync = () => this.props.increaseAsync();
+export default class App extends Component {
+
+  state = {
+    hasLoggedInOnce: false,
+    accessToken: '',
+    accessTokenExpirationDate: '',
+    refreshToken: ''
+  };
+
+  animateState(nextState, delay) {
+    setTimeout(() => {
+      this.setState(() => {
+        LayoutAnimation.easeInEaseOut();
+        return nextState;
+      });
+    }, delay);
+  }
+
+  authorize = async () => {
+    try {
+      const authState = await authorize({
+        issuer: 'https://dev-834920-admin.okta.com/oauth2/default',
+        clientId: '0oab7th6obORvxthI356',
+        redirectUrl: 'com.okta.dev-834920:/callback',
+        scopes: ['openid', 'profile', 'email', 'offline_access']
+      });
+      console.log(authState);
+      this.animateState(
+        {
+          hasLoggedInOnce: true,
+          accessToken: authState.accessToken,
+          accessTokenExpirationDate: authState.accessTokenExpirationDate,
+          refreshToken: authState.refreshToken
+        },
+        500
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  refresh = async () => {
+    try {
+      const authState = await refresh(this.state.refreshToken, scopes);
+      this.animateState({
+        accessToken: authState.accessToken || this.state.accessToken,
+        accessTokenExpirationDate:
+          authState.accessTokenExpirationDate || this.state.accessTokenExpirationDate,
+        refreshToken: authState.refreshToken || this.state.refreshToken
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  revoke = async () => {
+    try {
+      await revoke(this.state.accessToken);
+      this.animateState({
+        accessToken: '',
+        accessTokenExpirationDate: '',
+        refreshToken: ''
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   render() {
+    const {state} = this;
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={this.increaseCounter}>
-          <Text style={styles.welcome}>
-            Previous:
-            {this.props.previousCounter}
-          </Text>
-          <Text style={styles.welcome}>
-            Current:
-            {this.props.counter}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.increaseCounterAsync}>
-          <Text style={styles.welcome}>Increase in 5 seconds time</Text>
-        </TouchableOpacity>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View style={{ backgroundColor: "red", flex: 1, alignItems: "center", justifyContent: "center"}}>
+        {!!state.accessToken ? (
+          <View>
+            <Text>accessToken</Text>
+            <Text>{state.accessToken}</Text>
+            <Text>accessTokenExpirationDate</Text>
+            <Text>{state.accessTokenExpirationDate}</Text>
+            <Text>refreshToken</Text>
+            <Text>{state.refreshToken}</Text>
+          </View>
+        ) : (
+          <Text>{state.hasLoggedInOnce ? 'Goodbye.' : 'Hello, stranger.'}</Text>
+        )}
+
+        <View>
+          {!state.accessToken && (
+            <TouchableOpacity onPress={this.authorize}>
+              <Text>Authorize</Text>
+            </TouchableOpacity>
+          )}
+          {!!state.refreshToken && <TouchableOpacity onPress={this.refresh}><Text>Refresh</Text></TouchableOpacity>}
+          {!!state.accessToken && <TouchableOpacity onPress={this.revoke}><Text>Revoke</Text></TouchableOpacity>}
+        </View>
       </View>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  counter: state.counter.count,
-  previousCounter: counterSelectors.getPreviousCount(state.counter.count)
-});
-
-const mapDispatchToProps = dispatch => ({
-  onCounterClick: () => {
-    dispatch(counterActions.increment());
-  },
-  increaseAsync: () => {
-    dispatch(counterActions.incrementAsync());
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
-});

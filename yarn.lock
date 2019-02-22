@@ -9441,6 +9441,11 @@ react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.2.tgz#09891d324cad1cb0c1f2d91f70a71a4bee34df0f"
   integrity sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
 
+react-native-app-auth@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-app-auth/-/react-native-app-auth-4.0.0.tgz#d931a5a8780edb5ba3a18a02a44ae9be51a39a78"
+  integrity sha512-1PYJ3uVXtlR1wkQ3iJabGpEAIwlg0mFnngFzXAl3ztQ/6sovKZ9cn/2+CgWWwYtuY8MgQQfZb+1t/jPkKJxaBw==
+
 react-native-monorepo-helper@0.2.4:
   version "0.2.4"
   resolved "https://registry.yarnpkg.com/react-native-monorepo-helper/-/react-native-monorepo-helper-0.2.4.tgz#ede4834323275ed0b38da8fd59cce2f76f2c38a8"

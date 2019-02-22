@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'app' do
+  pod 'AppAuth', '>= 0.94'
+end
