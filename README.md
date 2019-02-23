@@ -1,4 +1,4 @@
-# `Mono Repo Example`
+# Mono Repo Example
 Intro
 =================
 A yarn workspace containing React, React Native and shared packages. 
