@@ -19,4 +19,7 @@ Button.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
+Button.Wrapper = Wrapper;
+Button.StyledButton = StyledButton;
+
 export default Button;

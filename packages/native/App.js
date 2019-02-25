@@ -3,7 +3,8 @@ import { Platform, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { counter } from '@monoexample/shared';
 import styled from 'styled-components/native';
-import Button from './src/components/Button/index';
+import Button from './src/components/blocks/Button';
+import H1 from './src/components/elements/H1';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <Container>
+        <H1>Welcome</H1>
         <Welcome>
           Previous:
           {this.props.previousCounter}
@@ -59,7 +61,7 @@ export default connect(
   mapDispatchToProps,
 )(App);
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
