@@ -25,7 +25,9 @@
     "reset:yarn": "yarn cache clean",
     "reset:rn": "watchman watch-del-all; rm -fr $TMPDIR/react-*; rm -rf $TMPDIR/haste-map-react-native-packager-*",
     "reset:cache": "yarn reset:yarn && yarn reset:rn",
-    "reset": "yarn reset:modules && yarn reset:cache"
+    "reset": "yarn reset:modules && yarn reset:cache",
+    "lint:web:css":"stylelint './packages/web/src/*.js'",
+    "lint:native:css":"stylelint './packages/native/src/*.js'"
   },
   "devDependencies": {
     "eslint": "5.12.0",
@@ -35,6 +37,10 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.11.0",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "stylelint": "^9.10.1",
+    "stylelint-config-recommended": "^2.1.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.5.2"
   }
 }
