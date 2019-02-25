@@ -13,6 +13,7 @@
     "nohoist": [
       "**/react-native",
       "**/react-native/**",
+      "**/styled-components",
       "**/jest"
     ]
   },
