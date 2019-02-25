@@ -1,8 +1,8 @@
 const theme = sharedTheme => ({
   ...sharedTheme,
   fonts: {
-    color: sharedTheme.colors.secondary
-  }
+    color: sharedTheme.colors.secondary,
+  },
 });
 
 export default theme;

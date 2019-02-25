@@ -1,8 +1,8 @@
-const projectRoot = __dirname
-const path = require('path')
+const projectRoot = __dirname;
+const path = require('path');
 const metroConfigHelper = require('react-native-monorepo-helper')
-	.metroConfigHelper
+  .metroConfigHelper;
 
 module.exports = metroConfigHelper(projectRoot)
-	.watchFolder(path.resolve(projectRoot, '../..'))
-	.generate()
+  .watchFolder(path.resolve(projectRoot, '../..'))
+  .generate();

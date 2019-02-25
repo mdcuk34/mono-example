@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Platform, TouchableOpacity } from "react-native";
-import { connect } from "react-redux";
-import { counter } from "@monoexample/shared";
-import styled from "styled-components/native";
+import React, { Component } from 'react';
+import { Platform, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { counter } from '@monoexample/shared';
+import styled from 'styled-components/native';
 
 const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
+  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
+    'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
 });
 
 class App extends Component {
@@ -41,7 +41,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   counter: state.counter.count,
-  previousCounter: counter.selectors.getPreviousCount(state.counter.count)
+  previousCounter: counter.selectors.getPreviousCount(state.counter.count),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -50,29 +50,29 @@ const mapDispatchToProps = dispatch => ({
   },
   increaseAsync: () => {
     dispatch(counter.actions.incrementAsync());
-  }
+  },
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);
 
 const Container = styled.View`
-  flex: 1
-  justifyContent: center
-  alignItems: center
-  backgroundColor: ${p => p.theme.colors.primary}
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${p => p.theme.colors.primary};
 `;
 
 const Welcome = styled.Text`
-  fontSize: ${p => p.theme.fonts.header}
-  textAlign: center
-  marginBottom: 10
+  font-size: ${p => p.theme.fonts.header};
+  text-align: center;
+  margin-bottom: 10;
 `;
 
 const Instructions = styled.Text`
-  textAlign: center
-  color: #333333
-  marginBottom: 5
+  text-align: center;
+  color: #333333;
+  margin-bottom: 5;
 `;

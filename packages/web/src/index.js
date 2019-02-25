@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ThemeProvider } from 'styled-components';
+import { theme as sharedTheme } from '@monoexample/shared';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ThemeProvider } from 'styled-components';
-import { theme as sharedTheme } from "@monoexample/shared"
-import localTheme from "./theme";
+import localTheme from './theme';
 
 const Entry = () => (
   <ThemeProvider theme={sharedTheme}>

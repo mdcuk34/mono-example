@@ -27,7 +27,11 @@
     "reset:cache": "yarn reset:yarn && yarn reset:rn",
     "reset": "yarn reset:modules && yarn reset:cache",
     "lint:web:css":"stylelint './packages/web/src/*.js'",
-    "lint:native:css":"stylelint './packages/native/src/*.js'"
+    "lint:native:css":"stylelint './packages/native/*.js' --fix",
+    "lint:web:eslint": "eslint --ignore-path .gitignore './packages/web/src/*.js' --fix",
+    "lint:native:eslint": "eslint --ignore-path .gitignore './packages/native/*.js' --fix",
+    "lint:web": "yarn lint:web:eslint ; yarn lint:web:css",
+    "lint:native": "yarn lint:native:eslint ; yarn lint:native:css"
   },
   "devDependencies": {
     "eslint": "5.12.0",
