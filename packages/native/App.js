@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Platform, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { counterActions, counterSelectors } from "@monoexample/shared";
+import { counter } from "@monoexample/shared";
 import styled from "styled-components/native";
 
 const instructions = Platform.select({
@@ -41,15 +41,15 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   counter: state.counter.count,
-  previousCounter: counterSelectors.getPreviousCount(state.counter.count)
+  previousCounter: counter.selectors.getPreviousCount(state.counter.count)
 });
 
 const mapDispatchToProps = dispatch => ({
   onCounterClick: () => {
-    dispatch(counterActions.increment());
+    dispatch(counter.actions.increment());
   },
   increaseAsync: () => {
-    dispatch(counterActions.incrementAsync());
+    dispatch(counter.actions.incrementAsync());
   }
 });
 

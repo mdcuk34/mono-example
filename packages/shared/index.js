@@ -1,1 +1,1 @@
-export { counterActions, counter, counterSelectors } from "./redux/counter";
+export { default as counter } from "./redux/counter";
