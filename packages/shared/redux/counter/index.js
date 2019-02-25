@@ -1,5 +1,3 @@
-import counter from "./reducers";
-import * as counterActions from "./actions";
-import * as counterSelectors from "./selectors";
-
-export { counterActions, counter, counterSelectors };
+export { default as counterActions } from "./actions";
+export { default as counterSelectors } from "./selectors";
+export { default as counter } from "./reducers";

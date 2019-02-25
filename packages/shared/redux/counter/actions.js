@@ -1,20 +1,20 @@
 import * as types from "./types";
 import * as helpers from "./helpers";
 
-export function increment() {
+function increment() {
   return {
     type: types.INCREMENT
   };
 }
 
-export function setCustomValue(payload) {
+function setCustomValue(payload) {
   return {
     type: types.SET_CUSTOM_VALUE,
     payload
   };
 }
 
-export function incrementAsync() {
+function incrementAsync() {
   return async (dispatch, getState) => {
     const {
       counter: { count }
@@ -24,3 +24,5 @@ export function incrementAsync() {
     dispatch(setCustomValue(result));
   };
 }
+
+export default { increment, setCustomValue, incrementAsync };
