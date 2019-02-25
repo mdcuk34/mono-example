@@ -19,6 +19,7 @@
   },
   "scripts": {
     "run:web": "yarn workspace web start",
+    "run:native:packager": "yarn workspace app react-native start",
     "run:native:ios": "yarn workspace app react-native run-ios",
     "run:native:android": "yarn workspace app react-native run-android",
     "reset:modules": "rm -rf node_modules/ yarn.lock packages/*/node_modules",
