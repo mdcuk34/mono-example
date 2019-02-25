@@ -10,7 +10,8 @@ module.exports = {
     "plugins": ["react", "jsx-a11y", "import", "prettier"],
     "extends": ["airbnb", "plugin:prettier/recommended"],
     "rules": {
-        "prettier/prettier": ["error", prettierOptions]
+        "prettier/prettier": ["error", prettierOptions],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     }
 };
 

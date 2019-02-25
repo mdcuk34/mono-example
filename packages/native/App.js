@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
+import { Platform, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { counter } from '@monoexample/shared';
 import styled from 'styled-components/native';
+import Button from './src/components/blocks/Button';
+import H1 from './src/components/elements/H1';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,19 +21,20 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <TouchableOpacity onPress={this.increaseCounter}>
-          <Welcome>
-            Previous:
-            {this.props.previousCounter}
-          </Welcome>
-          <Welcome>
-            Current:
-            {this.props.counter}
-          </Welcome>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.increaseCounterAsync}>
-          <Welcome>Increase in 5 seconds time</Welcome>
-        </TouchableOpacity>
+        <H1>Welcome</H1>
+        <Welcome>
+          Previous:
+          {this.props.previousCounter}
+          {'\n'}
+          Current:
+          {this.props.counter}
+        </Welcome>
+        <Button onPress={this.increaseCounter}>
+          <Text>Increase</Text>
+        </Button>
+        <Button onPress={this.increaseCounterAsync}>
+          <Text>Increase in 5 seconds time</Text>
+        </Button>
         <Instructions>To get started, edit App.js</Instructions>
         <Instructions>{instructions}</Instructions>
       </Container>
@@ -58,7 +61,7 @@ export default connect(
   mapDispatchToProps,
 )(App);
 
-const Container = styled.View`
+const Container = styled.SafeAreaView`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -66,9 +69,9 @@ const Container = styled.View`
 `;
 
 const Welcome = styled.Text`
+  margin-top: 100;
   font-size: ${p => p.theme.fonts.header};
   text-align: center;
-  margin-bottom: 10;
 `;
 
 const Instructions = styled.Text`
