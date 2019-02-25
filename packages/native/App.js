@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity
-} from "react-native";
+import { Platform, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { counterActions, counterSelectors } from "@monoexample/shared";
+import styled from "styled-components/native";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -23,23 +18,23 @@ class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <TouchableOpacity onPress={this.increaseCounter}>
-          <Text style={styles.welcome}>
+          <Welcome>
             Previous:
             {this.props.previousCounter}
-          </Text>
-          <Text style={styles.welcome}>
+          </Welcome>
+          <Welcome>
             Current:
             {this.props.counter}
-          </Text>
+          </Welcome>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.increaseCounterAsync}>
-          <Text style={styles.welcome}>Increase in 5 seconds time</Text>
+          <Welcome>Increase in 5 seconds time</Welcome>
         </TouchableOpacity>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+        <Instructions>To get started, edit App.js</Instructions>
+        <Instructions>{instructions}</Instructions>
+      </Container>
     );
   }
 }
@@ -63,21 +58,21 @@ export default connect(
   mapDispatchToProps
 )(App);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
-  }
-});
+const Container = styled.View`
+  flex: 1
+  justifyContent: center
+  alignItems: center
+  backgroundColor: #F5FCFF
+`;
+
+const Welcome = styled.Text`
+  fontSize: 20
+  textAlign: center
+  marginBottom: 10
+`;
+
+const Instructions = styled.Text`
+  textAlign: center
+  color: #333333
+  marginBottom: 5
+`;
