@@ -44,7 +44,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   counter: state.counter.count,
-  previousCounter: counter.selectors.getPreviousCount(state.counter.count),
+  previousCounter: counter.selectors.getPreviousCount(state),
 });
 
 const mapDispatchToProps = dispatch => ({
